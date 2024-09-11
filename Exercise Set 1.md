@@ -156,7 +156,7 @@ function binarySearch(array, target, low, high):            // T(n)
 ```
 
 ```
-T(n) = O(1)             if array[mid] == target
+T(n) = O(1)             if array[mid] == target, or if n = 1
      = O(1) + T(n/2)    if array[mid] != target
 ```
 By the Master Theorem, `a = 1`, `b = 2`, `d = 0`.
@@ -164,3 +164,115 @@ By the Master Theorem, `a = 1`, `b = 2`, `d = 0`.
 `2^0 = 1`, so `a = b^d`.
 
 Therefore, the time complexity is `O(lg(n))`.
+
+## 1.9
+> Use repeated substitution to find the WCRT of Binary Search in Big-O 
+notation.  Additionally, prove using induction that your closed 
+formula is correct.
+
+```
+T(n) = O(1)             if array[mid] == target, or if n = 1
+     = O(1) + T(n/2)    if array[mid] != target
+```
+`T(n) = 1 + T(n/2)`
+
+`T(n) = 1 + (1 + T(n/4))`
+
+`T(n) = 2 + T(n/(2^2))`
+
+`T(n) = 3 + T(n/(2^3))`
+
+`T(n) = m + T(n/(2^m))` for some `m`
+
+We know that `T(n) = O(1)` when `n = 1`. The worst case scenario of 
+this algorithm is that it must divide the array all the way until it's 
+left with a one-element subarray, so we can set `n/(2^m) = 1`. Solving 
+for m, we get `n = 2^m`, so `m = lg(n)`. We can substitute that into the previous equation to get:
+
+`T(n) = lg(n) + 1`, which means `T(n) = O(lg(n))`.
+
+***How to prove using induction that my closed formula is correct???***
+
+## 1.10
+> Professor Caesar wants to develop a matrix-multiplication algorithm 
+that uses a divide and conquer approach, diving each matrix into n/4x 
+n/4 submatrices, with the divide and combine steps together taking O
+(n^2 ).  Suppose that the professor's algo creates two recursive 
+subproblems of size n/4.  What is the WCRT of Caesar’s algo?  Please 
+show your work.
+
+```
+T(n) = 1                // base case
+     = 2T(n/4) + n^2    // recursive case
+```
+Using the Master theorem:
+
+`a = 2`, `b = 4`, `d = 2`
+
+`4^2 = 16`, so `a < b^d`
+
+So `T(n) = O(n^2)`
+
+## Bonus Exercise 1.1
+> Complete exercise 2-2 (all parts) on page 46 of the textbook (should 
+be the problem analyzing Bubble Sort).
+
+```
+BUBBLESORT(A, n)
+1   for i = 1 to n-1
+2       for j = n downto i + 1
+3           if A[j] < A[j - 1]
+4               exchange A[j] with A[j - 1]
+```
+
+### a. 
+> Let A' denote the array A after BUBBLESORT(A, n) is executed. To 
+prove that BUBBLESORT is correct, you need to prove that it terminates 
+and that `A'[1] <= A'[2] <= ... <= A'[n]`. In order to show that 
+BUBBLESORT actually sorts, what else do you need to prove?
+
+You also need to prove that no elements are added or removed between 
+`A` and `A'`, and that `A'` is the same length as `A`
+- For instance, if `A = [3, 1, 4, 1, 5]`, and 
+`A' = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`, that would still technically 
+not violate the rules outlined above, but the algorithm would not work 
+properly.
+
+### b.
+> State precisely a loop invariant for the **for** loop in lines 
+2-4, and prove that this loop invariant holds. Your proof should use 
+the structure of the loop-invariant proof presented in this chapter
+
+The inner **for** loop moves the smallest element of the unsorted 
+subarray down to the end of  the sorted subarray. For iteration `i`, 
+assume that there is a portion of the array at the beginning with 
+`i - 1` elements that are already in sorted order. The inner **for** 
+loop brings the smallest element of the unsorted subarray down into 
+the end of the sorted subarray, thereby increasing the sorted 
+portion's size by 1. The inner **for** loop terminates when `j` 
+reaches `i + 1`, that is, when it checks and swaps the elements at 
+indices `i` and `i + 1`. This works because all the elements in the 
+unsorted subarray are equal to or greater than all the elements in the 
+sorted subarray.
+
+### c.
+> Using the termination condition of the loop invariant proved in part 
+(b), state a loop invariant for the for loop in lines 1-4 that allows 
+you to prove inequality (2.5). Your proof should use the structure of 
+the loop-invariant proof presented in this chapter.
+
+Before the loop begins, everything from index `0` to `i` is already
+sorted. After the loop ends, everything from index `0` to `i + 1` is
+sorted. As `i` increases, the sorted portion of the array grows until
+it reaches `n - 1`. The element at index `n` is the greatest element
+in the array, because of the inner loop invariant's termination
+condition. When the sorted portion of the array is `n - 1`, the array 
+is fully sorted, and the outer **for** loop terminates.
+
+### d.
+> What is the worst-case running time of BUBBLESORT? How does it 
+compare with the running time of INSERTION-SORT?
+
+Both BUBBLESORT and INSERTION-SORT have a WCRT at `O(n^2)`, though a 
+quick Google search says that INSERTION-SORT tends to be faster in 
+practice because it makes fewer swaps.
