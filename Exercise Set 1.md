@@ -74,7 +74,7 @@ Sort Algorithm is `O(n^2)`
 > Use the master method to give tight asymptotic bounds for the following 
 recurrences.
 
-> a. `T(n) = 2T(n/4) + 1`
+### a. `T(n) = 2T(n/4) + 1`
 
 `a = 2`, `b = 4`, `d = 0`
 
@@ -84,7 +84,7 @@ recurrences.
 
 Therefore, the time complexity is `O(n^0.5)`, or `O(sqrt(n))`
 
-> b. `T(n) = 2T(n/4) + sqrt(n)`
+### b. `T(n) = 2T(n/4) + sqrt(n)`
 
 `a = 2`, `b = 4`, `d = 0.5`
 
@@ -92,7 +92,7 @@ Therefore, the time complexity is `O(n^0.5)`, or `O(sqrt(n))`
 
 Therefore, the time complexity is `O(sqrt(n) * log(n))`
 
-> c. `T(n) = 2T(n/4) + sqrt(n)lg^2(n)`
+### c. `T(n) = 2T(n/4) + sqrt(n)lg^2(n)`
 
 The master method does not work to give tight asymptotic bounds to this
 recurrence because the term `sqrt(n)lg^2(n)` cannot be re-written as a
@@ -108,7 +108,7 @@ power of `n` greater than `sqrt(n)lg^2(n)` for any arbitrarily large
 
 Therefore, a loose estimation for the time complexity is `O(n)`
 
-> d. `T(n) = 2T(n/4) + n`
+### d. `T(n) = 2T(n/4) + n`
 
 `a = 2`, `b = 4`, `d = 1`
 
@@ -116,7 +116,7 @@ Therefore, a loose estimation for the time complexity is `O(n)`
 
 Therefore, the time complexity is `O(n)`
 
-> e. `T(n) = 2T(n/4) + n^2`
+### e. `T(n) = 2T(n/4) + n^2`
 
 `a = 2`, `b = 4`, `d = 2`
 
