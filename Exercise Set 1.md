@@ -90,7 +90,7 @@ Therefore, the time complexity is `O(n^0.5)`, or `O(sqrt(n))`
 
 `4^0.5 = 2`, so `a = b^d`
 
-Therefore, the time complexity is `O(sqrt(n) * log_4(n))`
+Therefore, the time complexity is `O(sqrt(n) * log(n))`
 
 > c. `T(n) = 2T(n/4) + sqrt(n)lg^2(n)`
 
