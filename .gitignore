@@ -1,3 +1,13 @@
 Dropbox.lnk
 *.pdf
 Scans
+*.exe
+.vscode
+.vs
+Debug
+Heaps an.*
+x64
+CppProperties.json
+*.vcxproj
+*.vcxproj*
+Heaps and Priority Queues.sln
