@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -157,7 +157,7 @@ int main() {
     PriorityQueue todo;
     Task task(0, "");
     int selection;
-    
+
     cout << "Welcome to your favorite to-do list app!" << endl;
     while (true) {
         cout << "========================================" << endl;
@@ -171,7 +171,7 @@ int main() {
         cout << endl;
         cout << "   -1: Exit" << endl;
         cout << "========================================" << endl;
-        switch (enterInteger(1,6))
+        switch (enterInteger(1, 6))
         {
         case 1:     // see next
             try { task = todo.nextTask(); }
