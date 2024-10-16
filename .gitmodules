@@ -1,0 +1,3 @@
+[submodule "Employee_Info_BST"]
+	path = Employee_Info_BST
+	url = git@github.com:jebent521/Employee_Info_BST.git
