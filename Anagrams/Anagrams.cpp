@@ -1,7 +1,9 @@
-// Anagrams.cpp : Write a C++ program that takes a list of strings and groups anagrams together
-// Author: Jonah Ebent
-// 10/26/24
-//
+/*
+Name(s): Jonah Ebent and Evan Whitmer
+Date: October 26, 2024
+Class: CSC-344-A : Algorithms and Complexity 
+Description: Write a C++ program that takes a list of strings and groups anagrams together
+*/
 
 #include <algorithm>
 #include <cmath>
@@ -70,6 +72,7 @@ public:
         newNode->next = current;
         table[index] = newNode;
 
+        // occurs if table is not large enough
         if (current && normalize(current->data) != normalize(item)) {
             cout << "COLLISION DETECTED: " << current->data << " and "
                 << item << " have the same index: (" 
@@ -79,6 +82,7 @@ public:
         }
     }
 
+    // displays entire table
     void display() {
         for (int i = 0; i < size; i++) {
             Node* item = table.at(i);
@@ -91,6 +95,7 @@ public:
         }
     }
 
+    // displays anagrams and there similars
     void showAnagrams() {
         for (Node* item : table) {
             if (item) {
@@ -100,29 +105,20 @@ public:
         }
     }
 
+    // clears the entire table, not memory safe => can cause memory leaks
     void clear() {
         table = vector<Node*>(size, nullptr);
     }
 };
 
-vector<string> parseInput(string line, char delim) {
-    vector<string> tokens;
-    stringstream ss(line);
-    string token;
-    while (getline(ss, token, delim)) {
-        if (!token.empty())
-            tokens.push_back(token);
-    }
-    return tokens;
-
-}
-
 int main() {
+    // examples to copy and paste for testing
     // "Orb", "bro", "ate", "eden", "eat", "need", "joe", "code", "coed"
     // "Listen", "silent", "rat", "tar", "enlist", "art", "tinsel", "night", "thing", "live", "vile", "inlets"
     // "Plan", "man", "stan", "can", "chan", "jan", "clan", "ban", "pan", "urban"
     // Dormitory, dirty room, the eyes, they see, a gentleman, elegant man, funeral, real fun
 
+    //driver code
     HashTable anagrams(307);
     while (true) {
         cout << "Input a list of strings, separated by commas (empty line to exit)" << endl;
