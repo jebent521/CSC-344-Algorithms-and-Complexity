@@ -41,7 +41,7 @@ class HashTable {
         unsigned int sum = 0;
         for (int i = 0; i < str.size(); i++) {
             unsigned char c = str[i];
-            sum += (c-97) * (int)pow(26, i) % size;
+            sum += (c-96) * (int)pow(26, i) % size; // 96 so a starts at 1, (a != aaa)
         }
         return sum % size;
     }
