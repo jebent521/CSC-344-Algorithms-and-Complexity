@@ -12,25 +12,24 @@ def fractional_knapsack(
         values: list[int],
         weights: list[int]
     ) -> tuple[int, list[(int, float)]]:
-    '''solves the fractional knapsack problem'''
+    '''solves the fractional knapsack problem, returning a tuple of the max value and a list of the selected indices and fractions'''
     # create a list of tuples, representing items: (index, value, weight, ratio)
     items = sorted(list(zip(
             range(len(weights)),
             values,
             weights,
-            (v / w for v, w in zip(values, weights)),
             # enforce weights and values are same length
             strict=True
         )),
         # sort by ratio of value to weight
-        key = lambda i: i[3]
+        key = lambda i: i[1] / i[2]
     )
     # initialize return values
     total_value = 0
     sack = []
     # grab item with greatest value:weight ratio until bag is full or ALDI is empty
     while max_weight > 0 and len(items) > 0:
-        i, v, w, _ = items.pop()
+        i, v, w = items.pop()
         # if item's weight is less than max, take the entire thing
         # otherwise, take only a fraction of the item
         fraction = 1 if w <= max_weight else max_weight / w
