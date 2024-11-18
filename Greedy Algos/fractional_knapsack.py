@@ -13,7 +13,7 @@ def fractional_knapsack(
         weights: list[int]
     ) -> tuple[int, list[(int, float)]]:
     '''solves the fractional knapsack problem, returning a tuple of the max value and a list of the selected indices and fractions'''
-    # create a list of tuples, representing items: (index, value, weight, ratio)
+    # create a list of tuples, representing items: (index, value, weight)
     items = sorted(list(zip(
             range(len(weights)),
             values,
