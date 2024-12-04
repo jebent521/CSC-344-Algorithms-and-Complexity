@@ -59,35 +59,35 @@ class Graph:
             return [(self.matrix[v][u], v, u) for u in range(self.size) if self.matrix[v][u] != None] 
         return [(v, u, self.matrix[v][u]) for u in range(self.size) if self.matrix[v][u] != None] 
 
+    def _find(self, x, parent):
+        '''finds the root of the set x is in'''
+        if x != parent[x]:
+            parent[x] = self._find(parent[x], parent)
+        return parent[x]
+
+    def _union(self, x, y, parent, rank):
+        '''combines the two trees x and y are part of'''
+        rx = self._find(x, parent)
+        ry = self._find(y, parent)
+        if rx == ry: return
+        if rank[ry] > rank[rx]:
+            parent[rx] = ry
+        else:
+            parent[ry] = rx
+            if rank[rx] == rank[ry]:
+                rank[rx] += 1
+
     def kruskal(self):
         # equivalent to makeset(u) for u in V
         parent = [i for i in range(self.size)]
         rank = [0] * self.size
 
-        def find(x):
-            '''finds the root of the set x is in'''
-            if x != parent[x]:
-                parent[x] = find(parent[x])
-            return parent[x]
-        
-        def union(x, y):
-            '''combines the two trees x and y are part of'''
-            rx = find(x)
-            ry = find(y)
-            if rx == ry: return
-            if rank[ry] > rank[rx]:
-                parent[rx] = ry
-            else:
-                parent[ry] = rx
-                if rank[rx] == rank[ry]:
-                    rank[rx] += 1
-
         mst = []
         self.edges.sort(key=lambda x: x[2])
         for u,v,w in self.edges:
-            if find(u) != find(v):
+            if self._find(u, parent) != self._find(v, parent):
                 mst.append((u, v, w))
-                union(u, v)
+                self._union(u, v, parent, rank)
         return mst
 
     def prim(self):
