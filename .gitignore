@@ -4,4 +4,6 @@ Scans
 *.exe
 .vscode
 .vs
-Graph Theory
+x64
+*.sln
+*.vcxproj*
